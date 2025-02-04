@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://b25ak0n3dr61e"]
+
+[ext_resource type="Script" path="res://脚本/node_2d.gd" id="1_cbepk"]
+[ext_resource type="Script" path="res://脚本/camera3d.gd" id="1_mq3cg"]
+[ext_resource type="Texture2D" uid="uid://bra2xsnkfdi36" path="res://dithstyle.png" id="2_gpek2"]
+[ext_resource type="Shader" path="res://着色器/成品.gdshader" id="2_gyk34"]
+[ext_resource type="Script" path="res://脚本/h_slider.gd" id="5_5f7vh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u774t"]
+diffuse_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_5ludn"]
+material = SubResource("StandardMaterial3D_u774t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iarng"]
+shader = ExtResource("2_gyk34")
+shader_parameter/Vector3Parameter = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/Vector3Parameter2 = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/dith_level = 1.0
+shader_parameter/dithstyle = ExtResource("2_gpek2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qqnj8"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_cbepk")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.77002)
+projection = 1
+current = true
+size = 5.0
+script = ExtResource("1_mq3cg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
+mesh = SubResource("SphereMesh_5ludn")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasModulate"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_iarng")
+position = Vector2(255, 147.5)
+texture = SubResource("ViewportTexture_qqnj8")
+
+[node name="Button" type="HSlider" parent="." node_paths=PackedStringArray("sprite_2d")]
+custom_minimum_size = Vector2(100, 0)
+offset_right = 100.0
+offset_bottom = 16.0
+max_value = 1.0
+step = 0.0
+script = ExtResource("5_5f7vh")
+sprite_2d = NodePath("../CanvasModulate/Sprite2D")
+
+[connection signal="value_changed" from="Button" to="Button" method="_on_value_changed"]

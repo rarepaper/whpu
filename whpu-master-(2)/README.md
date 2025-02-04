@@ -1,0 +1,2 @@
+用于2d的是test_scene.tscn
+用于3d的是node_3d.tscn
