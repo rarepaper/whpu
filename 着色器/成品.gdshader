@@ -1,8 +1,8 @@
 shader_type canvas_item;
 render_mode blend_mix;
 uniform sampler2D dithstyle;
-uniform vec3 Vector3Parameter :source_color= vec3(0.800000, 0.000000, 0.000000);
-uniform vec3 Vector3Parameter2 :source_color= vec3(0.200000, 0.000000, 0.000000);
+uniform vec3 Vector3Parameter :source_color= vec3(0.800000, 0.8, 0.8);
+uniform vec3 Vector3Parameter2 :source_color= vec3(0.200000, 0.2, 0.2);
 uniform float dith_level:hint_range(0.0, 1.0)=1.0;
 
 // constant_interpolation

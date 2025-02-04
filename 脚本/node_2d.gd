@@ -1,4 +1,4 @@
-extends Node
-signal input_a
+extends Node2D
 func _input(event):
-	input_a.emit(event)
+	if event is InputEventMouseMotion:
+		$SubViewport.push_input(event)

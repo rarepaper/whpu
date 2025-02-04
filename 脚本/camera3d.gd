@@ -6,7 +6,7 @@ var mouse_sens=0.01
 var r
 var r_y
 
-func input_b(event):
+func _input(event):
 	if event is InputEventMouseMotion and Input.is_action_pressed("drag"):
 		var mouse_delta = event.relative * mouse_sens
 		r_y=sqrt(r*r-position.y*position.y)
