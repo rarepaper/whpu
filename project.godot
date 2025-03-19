@@ -11,14 +11,16 @@ config_version=5
 [application]
 
 config/name="Whpu-master (2)"
-run/main_scene="res://node_3d.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="res://3d（viewport）/node_3d.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://哇哦.svg"
 
 [display]
 
 window/size/viewport_width=512
-window/size/viewport_height=288
+window/size/viewport_height=300
+window/size/window_width_override=1024
+window/size/window_height_override=600
 window/stretch/mode="viewport"
 
 [dotnet]

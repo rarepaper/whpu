@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsr4cwqdawho8"]
+
+[ext_resource type="Shader" uid="uid://ymnam3cae6yp" path="res://3d （LIGHT）/s/gdshader.gdshader" id="1_a202f"]
+[ext_resource type="Texture2D" uid="uid://cyes86d1qcvf7" path="res://3d （LIGHT）/dithstyle.png" id="2_a0tk4"]
+[ext_resource type="Script" uid="uid://dr0oakv4ui7fy" path="res://3d （LIGHT）/camera3d.gd" id="2_noarx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a0tk4"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_r3fl7"]
+sky_material = SubResource("ProceduralSkyMaterial_a0tk4")
+
+[sub_resource type="Environment" id="Environment_jka67"]
+background_mode = 2
+sky = SubResource("Sky_r3fl7")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_noarx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0tk4"]
+render_priority = 0
+shader = ExtResource("1_a202f")
+shader_parameter/dithstyle = ExtResource("2_a0tk4")
+shader_parameter/Vector3Parameter = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/Vector3Parameter2 = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jka67")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00388604, -0.0137834, 0.0243515)
+mesh = SubResource("SphereMesh_noarx")
+surface_material_override/0 = SubResource("ShaderMaterial_a0tk4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.49126)
+script = ExtResource("2_noarx")
